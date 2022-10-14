@@ -1,7 +1,13 @@
+// Dependencies
+import { Routes, Route } from 'react-router-dom';
+
+// Components
+import Login from './pages/Login';
+
 // Lo importamos
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setUser, unsetUser } from './reducers/user/userSlice';
+// import { setUser, unsetUser } from './reducers/user/userSlice'; (esto forma parte del ejemplo)
 
 // Styles
 import './App.scss';
@@ -15,32 +21,35 @@ function App() {
   // Los dispatch se hacen gracias a un event handler, este onClick va a ser una funcion que va a tomar el dispatch, el dispatch va a tomar el action
   // creators setUser y entre parentesis va a mandar un payload, nos fijamos en el setUser que payload nesecita que le envie
   // El dispatch y el action gracias a su payload es como un setState pero en este caso global
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // Entre parentesis lo que hacemos es decir que del estado global, dame el estado que se llama en este caso user
-  const { email, fullName, token } = useSelector(state => state.user);
-  // console.log(email);
+  // const { email, fullName, token } = useSelector(state => state.user);
 
   return (
-    <>
-      <h1>Email: {email}</h1>
-      <h1>FullName: {fullName}</h1>
-      <h1>Token: {token}</h1>
-      <button
-        onClick={() => {
-          dispatch(
-            setUser({
-              email: 'vieyra.gabriel08@gmail.com',
-              fullName: 'Gabriel Vieyra',
-              token: '123456789',
-            })
-          );
-        }}
-      >
-        Set User
-      </button>
-      <button onClick={() => dispatch(unsetUser())}>Unset User</button>
-    </>
+    // esto forma parte del ejemplo
+    // <>
+    //   <h1>Email: {email}</h1>
+    //   <h1>FullName: {fullName}</h1>
+    //   <h1>Token: {token}</h1>
+    //   <button
+    //     onClick={() => {
+    //       dispatch(
+    //         setUser({
+    //           email: 'vieyra.gabriel08@gmail.com',
+    //           fullName: 'Gabriel Vieyra',
+    //           token: '123456789',
+    //         })
+    //       );
+    //     }}
+    //   >
+    //     Set User
+    //   </button>
+    //   <button onClick={() => dispatch(unsetUser())}>Unset User</button>
+    // </>
+    <Routes>
+      <Route path='/' element={<Login />} />
+    </Routes>
   );
 }
 
