@@ -1,11 +1,11 @@
-// Dependencies
 import { Routes, Route } from 'react-router-dom';
 
 // Components
 import Login from './pages/Login';
+import Home from './pages/Home';
 
 // Lo importamos
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
 
 // import { setUser, unsetUser } from './reducers/user/userSlice'; (esto forma parte del ejemplo)
 
@@ -14,8 +14,8 @@ import './App.scss';
 
 function App() {
   // actualizamos el estado del store con el hook useDispatch
-  // ej para actualizar el estado email, fullName, token usamos el hook useDispatch que lo vamos a almacenar en una variable (ej linea 18) y despues nos
-  // vamos a traer los actions creators que nesecitamos ej en este caso setUser (linea 4) y entre parentesis le vamos a enviar el payload en caso de que lo nesecite
+  // ej para actualizar el estado email, fullName, token usamos el hook useDispatch que lo vamos a almacenar en una variable (ej linea 24) y despues nos
+  // vamos a traer los actions creators que nesecitamos ej en este caso setUser (linea 10) y entre parentesis le vamos a enviar el payload en caso de que lo nesecite
   // Es un hook que te da react-redux para que puedas disparar actions a lo que es el reducer, para que el reducer lo tome y sepa que hacer
   // El dispatch se va a encargar de hacer la actualizacion del estado gracias a los actions
   // Los dispatch se hacen gracias a un event handler, este onClick va a ser una funcion que va a tomar el dispatch, el dispatch va a tomar el action
@@ -49,6 +49,7 @@ function App() {
     // </>
     <Routes>
       <Route path='/' element={<Login />} />
+      <Route path='/home' element={<Home />} />
     </Routes>
   );
 }
