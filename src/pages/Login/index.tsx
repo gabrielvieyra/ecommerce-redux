@@ -1,4 +1,4 @@
-import { FC, useRef } from 'react';
+import { FC, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // Redux
@@ -7,6 +7,12 @@ import { setUser } from '../../reducers/user/userSlice';
 
 // Nos importamos la libreria
 import axios from 'axios';
+
+// FontAwesomeIcon
+// Nos importamos el componente FontAwesomeIcon
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// Nos importamos los iconos que queremos utilizar
+import { faCheckCircle, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 // Styles
 import './styles.scss';
@@ -63,20 +69,89 @@ const Login: FC = () => {
     }
   }
 
+  // Validacion de formularios
+  const [error, setError] = useState<boolean>(false);
+
+  function handleBlur(e: React.FocusEvent<HTMLInputElement>): void {
+    // Validamos que el campo no este vacio
+    const emailFieldValue = e.target.value;
+    // emailFieldValue es un string que si yo le hago un .length voy a obtener la cantidad de caracteres
+    emailFieldValue.length === 0 ? setError(true) : setError(false);
+  }
+
   // Ejercicio: Hacer un formulario de logueo que me lleve a otra pagina
   return (
     <div className='loginContainer'>
       <h1>Login Form</h1>
       <form onSubmit={handleSubmit}>
         <div className='loginContainer__wrapper'>
-          <label>Email address</label>
-          <input type='email' placeholder='email' ref={emailField} />
+          <label htmlFor='email'>Email address</label>
+          <div className='loginContainer__wrapper-groupInput'>
+            <input
+              type='email'
+              name='email'
+              id='email'
+              placeholder='Email address'
+              autoComplete='off'
+              ref={emailField}
+              onBlur={handleBlur}
+              className={
+                error
+                  ? `loginContainer__wrapper-groupInput-input loginContainer__wrapper-groupInput-input--error`
+                  : `loginContainer__wrapper-groupInput-input`
+              }
+            />
+            <FontAwesomeIcon
+              icon={faCheckCircle}
+              className='loginContainer__wrapper-groupInput-iconValidation'
+            />
+          </div>
+          {error && (
+            <span className='loginContainer__wrapper-error'>
+              Debes escribir un nombre de usuario
+            </span>
+          )}
         </div>
+
         <div className='loginContainer__wrapper'>
-          <label>Password</label>
-          <input type='password' placeholder='password' ref={passwordField} />
+          <label htmlFor='clave'>Password</label>
+          <div className='loginContainer__wrapper-groupInput'>
+            <input
+              type='password'
+              name='password'
+              id='clave'
+              placeholder='Password'
+              ref={passwordField}
+              onBlur={handleBlur}
+              className={
+                error
+                  ? `loginContainer__wrapper-groupInput-input loginContainer__wrapper-groupInput-input--error`
+                  : `loginContainer__wrapper-groupInput-input`
+              }
+            />
+            <FontAwesomeIcon
+              icon={faCheckCircle}
+              className='loginContainer__wrapper-groupInput-iconValidation'
+            />
+          </div>
+          {error && (
+            <span className='loginContainer__wrapper-error'>Debes escribir un password</span>
+          )}
         </div>
-        <button type='submit'>Submit</button>
+        <div className='loginContainer__wrapperRememberMe'>
+          <input type='checkbox' id='checkbox' />
+          <label htmlFor='checkbox'>Remember me</label>
+        </div>
+        {false && (
+          <div className='loginContainer__errorMessagewrapper'>
+            <p>
+              <FontAwesomeIcon icon={faExclamationTriangle} />
+              <b>Error: </b>Por favor rellena el formulario correctamente
+            </p>
+          </div>
+        )}
+        {/* si al boton le agregamos el type submit, cuando lo presionesmos va a enviar el formulario */}
+        <button type='submit'>Sign in</button>
       </form>
     </div>
   );
