@@ -1,56 +1,60 @@
-import { FC, useState, useRef } from 'react';
+import { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // Redux
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../reducers/user/userSlice';
 
-// Nos importamos la libreria
+// Components
+import TextField from '../../components/TextField';
+
+// Nos importamos la libreria axios
 import axios from 'axios';
 
 // FontAwesomeIcon
 // Nos importamos el componente FontAwesomeIcon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Nos importamos los iconos que queremos utilizar
-import { faCheckCircle, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 // Styles
 import './styles.scss';
 
-// Interface
-import { User } from '../../types/types';
+// Interfaces
+import { User, InputValue } from '../../types/types';
 
 const Login: FC = () => {
-  // El useRef me permite obtener un elemento, de ese lemento puedo tambien obtener su valor y entreparentesis le pasamos el valor inicial
-  const emailField = useRef('');
-  // obtenemos el elemento
-  // console.log(emailField.current);
-  // obtenemos el valor del elemento
-  // console.log(emailField.current.value);
-  const passwordField = useRef('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault();
+    // Validamos si todos los campos del formulario estan correctos
+    if (!emailField.isInvalid && !passwordField.isInvalid) {
+      setInvalidForm(false);
+      setEmailField({ field: '', isInvalid: false, state: null });
+      setPasswordField({ field: '', isInvalid: false, state: null });
+    } else {
+      setInvalidForm(true);
+    }
 
     try {
       // Obtenemos la respuesta de la API
-      // si no le pasas un metodo a axios por defecto hace un get
-      // dentro de data va a estar lo que queremos
+      // Si no le pasas un metodo a axios por defecto hace un get
+      // Dentro de data va a estar lo que queremos
       const getResponse = await axios.get('https://fakestoreapi.com/users');
       // Obtenemos todos los usuarios
       const users = getResponse.data;
       // De todos los usuarios busco por email el usuario que quiero
       const userToLog = users.find((user: User) => {
         const { email } = user;
-        return email === emailField.current.value;
+        return email === emailField.field;
       });
-      //   console.log(userToLog);
+      // console.log(userToLog);
 
       if (userToLog) {
         // validamos si el password coincide con el del campo password
-        if (userToLog.password === passwordField.current.value) {
+        if (userToLog.password === passwordField.field) {
           // voy a hacer un dispatch cuando tenga un usuario valido
           // console.log('Credenciales validas');
           dispatch(
@@ -70,79 +74,79 @@ const Login: FC = () => {
   }
 
   // Validacion de formularios
-  const [error, setError] = useState<boolean>(false);
+  const [emailField, setEmailField] = useState<InputValue>({
+    field: '',
+    isInvalid: false,
+    state: null,
+  });
+  const [passwordField, setPasswordField] = useState<InputValue>({
+    field: '',
+    isInvalid: false,
+    state: null,
+  });
+  const [checkbox, setCheckbox] = useState<boolean>(false);
+  const [invalidForm, setInvalidForm] = useState<boolean>(false);
 
-  function handleBlur(e: React.FocusEvent<HTMLInputElement>): void {
-    // Validamos que el campo no este vacio
-    const emailFieldValue = e.target.value;
-    // emailFieldValue es un string que si yo le hago un .length voy a obtener la cantidad de caracteres
-    emailFieldValue.length === 0 ? setError(true) : setError(false);
+  // Validamos el campo de tipo field
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>): void {
+    // files es una propiedad de este campo que nos va a retornar los archivos que la persona cargo
+    // Capturamos la extension del archivo
+    const fileExtension = e.target.files![0].name.split('.').pop()!.toLowerCase();
+    const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+
+    // Validamos si mi array de extensiones permitidas incluye la extension que me pasan
+    allowedExtensions.includes(fileExtension)
+      ? console.log('archivo valido')
+      : console.log('archivo invalido');
   }
+
+  // Validamos el checkbox
+  // function handleCheckbox(e: React.ChangeEvent<HTMLInputElement>): void {
+  //   console.log(e.target.checked);
+  //   setCheckbox(e.target.checked);
+  // }
 
   // Ejercicio: Hacer un formulario de logueo que me lleve a otra pagina
   return (
     <div className='loginContainer'>
       <h1>Login Form</h1>
       <form onSubmit={handleSubmit}>
-        <div className='loginContainer__wrapper'>
-          <label htmlFor='email'>Email address</label>
-          <div className='loginContainer__wrapper-groupInput'>
-            <input
-              type='email'
-              name='email'
-              id='email'
-              placeholder='Email address'
-              autoComplete='off'
-              ref={emailField}
-              onBlur={handleBlur}
-              className={
-                error
-                  ? `loginContainer__wrapper-groupInput-input loginContainer__wrapper-groupInput-input--error`
-                  : `loginContainer__wrapper-groupInput-input`
-              }
-            />
-            <FontAwesomeIcon
-              icon={faCheckCircle}
-              className='loginContainer__wrapper-groupInput-iconValidation'
-            />
-          </div>
-          {error && (
-            <span className='loginContainer__wrapper-error'>
-              Debes escribir un nombre de usuario
-            </span>
-          )}
-        </div>
-
-        <div className='loginContainer__wrapper'>
-          <label htmlFor='clave'>Password</label>
-          <div className='loginContainer__wrapper-groupInput'>
-            <input
-              type='password'
-              name='password'
-              id='clave'
-              placeholder='Password'
-              ref={passwordField}
-              onBlur={handleBlur}
-              className={
-                error
-                  ? `loginContainer__wrapper-groupInput-input loginContainer__wrapper-groupInput-input--error`
-                  : `loginContainer__wrapper-groupInput-input`
-              }
-            />
-            <FontAwesomeIcon
-              icon={faCheckCircle}
-              className='loginContainer__wrapper-groupInput-iconValidation'
-            />
-          </div>
-          {error && (
-            <span className='loginContainer__wrapper-error'>Debes escribir un password</span>
-          )}
+        <TextField
+          label='Email address'
+          type='email'
+          name='email'
+          placeholder='Email address'
+          errorMessage='Debes escribir un nombre de usuario'
+          regularExpression={/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/}
+          state={emailField}
+          setState={setEmailField}
+        />
+        <TextField
+          label='Password'
+          type='password'
+          name='password'
+          placeholder='Password'
+          errorMessage='Debes escribir un password'
+          // le vamos a pasar que expresion regular queremos utilizar para validar este input
+          state={passwordField}
+          setState={setPasswordField}
+        />
+        <div>
+          <label htmlFor='avatar'>Sube tu imagen:</label>
+          {/* multiple nos da la posibilidad de cargar multiples archivos */}
+          <input type='file' id='avatar' onChange={handleChange} />
         </div>
         <div className='loginContainer__wrapperRememberMe'>
-          <input type='checkbox' id='checkbox' />
+          <input
+            type='checkbox'
+            id='checkbox'
+            name='chekbox'
+            checked={checkbox}
+            onChange={e => setCheckbox(e.target.checked)}
+          />
           <label htmlFor='checkbox'>Remember me</label>
         </div>
-        {false && (
+        {invalidForm && (
           <div className='loginContainer__errorMessagewrapper'>
             <p>
               <FontAwesomeIcon icon={faExclamationTriangle} />
@@ -150,7 +154,6 @@ const Login: FC = () => {
             </p>
           </div>
         )}
-        {/* si al boton le agregamos el type submit, cuando lo presionesmos va a enviar el formulario */}
         <button type='submit'>Sign in</button>
       </form>
     </div>

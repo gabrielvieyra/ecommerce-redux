@@ -11,3 +11,9 @@ export interface ProductType {
   price: number;
   category: string;
 }
+
+export interface InputValue {
+  field: string;
+  isInvalid: boolean;
+  state: null | 'error' | 'success' | 'disabled';
+}
