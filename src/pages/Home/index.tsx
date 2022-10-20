@@ -1,15 +1,15 @@
 import { FC, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+// Components
+import ProductsList from '../../components/ProductsList';
+
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
 import { unsetUser } from '../../reducers/user/userSlice';
 
 // Axios
 import axios from 'axios';
-
-// Components
-import ProductsList from '../../components/ProductsList';
 
 // Interface
 import { ProductType } from '../../types/types';

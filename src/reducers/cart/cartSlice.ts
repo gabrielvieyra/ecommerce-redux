@@ -24,9 +24,16 @@ export const cartSlice = createSlice({
       state.productsList = [...state.productsList, action.payload];
       state.totalCount += 1;
     },
+    removeProductFromCart: (state, action) => {
+      // En este caso del payload vamos a recibir un id, lo que me pasan lo guardamos en una variable
+      const productId = action.payload;
+      // Le resto a este estado -1 por que eliminaron un producto
+      state.totalCount -= 1;
+      state.productsList = state.productsList.filter(product => product.id !== productId);
+    },
   },
 });
 
-export const { addProductToCart } = cartSlice.actions;
+export const { addProductToCart, removeProductFromCart } = cartSlice.actions;
 
 export default cartSlice.reducer;
