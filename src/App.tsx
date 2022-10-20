@@ -1,16 +1,20 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 
 // Components
 import Login from './pages/Login';
 import Home from './pages/Home';
+import Cart from './pages/Cart';
 
-// Lo importamos
-// import { useSelector, useDispatch } from 'react-redux';
-
-// import { setUser, unsetUser } from './reducers/user/userSlice'; (esto forma parte del ejemplo)
+// FontAwesomeIcon
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 // Styles
 import './App.scss';
+
+// Lo importamos
+import { useSelector, useDispatch } from 'react-redux';
+// import { setUser, unsetUser } from './reducers/user/userSlice'; (esto forma parte del ejemplo)
 
 function App() {
   // actualizamos el estado del store con el hook useDispatch
@@ -25,6 +29,9 @@ function App() {
 
   // Entre parentesis lo que hacemos es decir que del estado global, dame el estado que se llama en este caso user
   // const { email, fullName, token } = useSelector(state => state.user);
+
+  // Voy a consumir la informacion del carrito de productos
+  const { totalCount } = useSelector(state => state.cart);
 
   return (
     // esto forma parte del ejemplo
@@ -47,10 +54,26 @@ function App() {
     //   </button>
     //   <button onClick={() => dispatch(unsetUser())}>Unset User</button>
     // </>
-    <Routes>
-      <Route path='/' element={<Login />} />
-      <Route path='/home' element={<Home />} />
-    </Routes>
+    <>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: '12px' }}>
+          <Link to='/'>Login</Link>
+          <Link to='/home'>Home</Link>
+        </div>
+        <div>
+          <Link to='/cart' style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <FontAwesomeIcon icon={faCartShopping} />
+            <span>Cart ({totalCount})</span>
+          </Link>
+        </div>
+      </div>
+      <hr />
+      <Routes>
+        <Route path='/' element={<Login />} />
+        <Route path='/home' element={<Home />} />
+        <Route path='/cart' element={<Cart />} />
+      </Routes>
+    </>
   );
 }
 
