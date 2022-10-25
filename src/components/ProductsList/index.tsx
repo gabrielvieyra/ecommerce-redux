@@ -13,6 +13,10 @@ import { ProductType } from '../../types/types';
 // Styles
 import './styles.scss';
 
+// FontAwesomeIcon
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle, faTimesCircle, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+
 interface ProductsListProps {
   products: Array<ProductType>;
 }
@@ -35,6 +39,17 @@ const ProductsList: FC<ProductsListProps> = ({ products }) => {
     }
   }
 
+  // Prueba de una lista dinamica:
+  interface Link {
+    text: string;
+    icon: IconDefinition;
+  }
+
+  const links: Array<Link> = [
+    { text: 'TimesCircle', icon: faTimesCircle },
+    { text: 'CheckCircle', icon: faCheckCircle },
+  ];
+
   return (
     <>
       <h2>Listado de productos</h2>
@@ -54,6 +69,18 @@ const ProductsList: FC<ProductsListProps> = ({ products }) => {
               }
               colorButton={productsList.find(product => product.id === id) ? 'red' : 'green'}
             />
+          );
+        })}
+      </div>
+      <hr style={{ margin: '1rem 0' }} />
+      <div style={{ display: 'flex', gap: '12px' }}>
+        {links.map((link, index) => {
+          const { text, icon } = link;
+          return (
+            <div key={index}>
+              <FontAwesomeIcon icon={icon} />
+              <span>{text}</span>
+            </div>
           );
         })}
       </div>
