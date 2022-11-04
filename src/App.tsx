@@ -5,6 +5,10 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import Cart from './pages/Cart';
 
+import Register from './pages/Register';
+import Login02 from './pages/Login02';
+import Welcome from './pages/Welcome';
+
 // FontAwesomeIcon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
@@ -72,6 +76,10 @@ function App() {
         <Route path='/' element={<Login />} />
         <Route path='/home' element={<Home />} />
         <Route path='/cart' element={<Cart />} />
+
+        <Route path='/register' element={<Register />} />
+        <Route path='/login02' element={<Login02 />} />
+        <Route path='/welcome/:id' element={<Welcome />} />
       </Routes>
     </>
   );
