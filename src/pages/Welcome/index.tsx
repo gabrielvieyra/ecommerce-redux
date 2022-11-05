@@ -1,5 +1,4 @@
 import { FC, useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 
 // Axios
 import axios from 'axios';
@@ -10,16 +9,24 @@ import './styles.scss';
 const Welcome: FC = () => {
   const [name, setName] = useState<string>('');
 
-  const { id } = useParams();
+  const token = localStorage.getItem('token');
+  // console.log(getToken);
 
   useEffect(() => {
-    getUser();
-  }, [id]);
+    if (token) {
+      getUser();
+    }
+  }, [token]);
 
   async function getUser(): Promise<void> {
     try {
-      const getResponse = await axios.get(`http://localhost:4000/user/${id}`);
-      // console.log(getResponse);
+      const { data } = await axios.get('http://localhost:4000/user', {
+        headers: {
+          token: token,
+        },
+      });
+      // console.log(data);
+      setName(data.nombre);
     } catch (err) {
       console.log(err);
     }

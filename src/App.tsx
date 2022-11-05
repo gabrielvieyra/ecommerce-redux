@@ -79,7 +79,7 @@ function App() {
 
         <Route path='/register' element={<Register />} />
         <Route path='/login02' element={<Login02 />} />
-        <Route path='/welcome/:id' element={<Welcome />} />
+        <Route path='/welcome' element={<Welcome />} />
       </Routes>
     </>
   );

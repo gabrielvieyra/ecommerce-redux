@@ -39,13 +39,14 @@ const Login02: FC = () => {
 
       try {
         const { data } = await axios.post('http://localhost:4000/login', User);
-        const IdUser = data.usuario.id;
-        // console.log(IdUser);
+        // console.log(data);
+        const token = data.usuario.token;
+        localStorage.setItem('token', token);
         setInputs({
           email: '',
           password: '',
         });
-        navigate(`/welcome/${IdUser}`);
+        navigate('/welcome');
       } catch (err) {
         console.log(err);
       }
