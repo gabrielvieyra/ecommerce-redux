@@ -11,6 +11,8 @@ import Welcome from './pages/Welcome';
 
 import Crud from './pages/Crud';
 
+import CloneJira from './pages/CloneJira';
+
 // FontAwesomeIcon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
@@ -61,7 +63,7 @@ function App() {
     //   <button onClick={() => dispatch(unsetUser())}>Unset User</button>
     // </>
     <>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      {/* <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ display: 'flex', gap: '12px' }}>
           <Link to='/'>Login</Link>
           <Link to='/home'>Home</Link>
@@ -73,7 +75,7 @@ function App() {
           </Link>
         </div>
       </div>
-      <hr />
+      <hr /> */}
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='/home' element={<Home />} />
@@ -84,6 +86,8 @@ function App() {
         <Route path='/welcome' element={<Welcome />} />
 
         <Route path='/crud' element={<Crud />} />
+
+        <Route path='/clone-jira' element={<CloneJira />} />
       </Routes>
     </>
   );

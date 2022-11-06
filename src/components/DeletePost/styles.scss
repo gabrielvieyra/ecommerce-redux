@@ -1,75 +1,75 @@
-h1 {
-  padding: 1em 0 0 0;
-  line-height: 0.5em;
-  text-align: center;
-}
+// h1 {
+//   padding: 1em 0 0 0;
+//   line-height: 0.5em;
+//   text-align: center;
+// }
 
-h2 {
-  text-align: center;
-  font-weight: lighter;
-  font-size: 1em;
-}
+// h2 {
+//   text-align: center;
+//   font-weight: lighter;
+//   font-size: 1em;
+// }
 
-.grid {
-  margin-top: 0em;
-  padding: 1em;
-  display: flex;
-  gap: 1em;
-  flex-wrap: wrap;
-}
+// .grid {
+//   margin-top: 0em;
+//   padding: 1em;
+//   display: flex;
+//   gap: 1em;
+//   flex-wrap: wrap;
+// }
 
-.grid > div {
-  min-width: 400px;
-  flex: 1;
-  background: rgb(5, 5, 5);
-  box-shadow: 10px 10px 10px rgba(63, 61, 61, 0.808);
-  border-radius: 15px;
-  padding: 1em;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  transition: all 0.3s ease;
-}
+// .grid > div {
+//   min-width: 400px;
+//   flex: 1;
+//   background: rgb(5, 5, 5);
+//   box-shadow: 10px 10px 10px rgba(63, 61, 61, 0.808);
+//   border-radius: 15px;
+//   padding: 1em;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 10px;
+//   transition: all 0.3s ease;
+// }
 
-.grid > div > p {
-  color: rgb(162, 149, 243);
-  font-weight: bold;
-}
+// .grid > div > p {
+//   color: rgb(162, 149, 243);
+//   font-weight: bold;
+// }
 
-.grid > div > p > span {
-  color: white;
-  font-weight: normal;
-}
+// .grid > div > p > span {
+//   color: white;
+//   font-weight: normal;
+// }
 
-button {
-  display: block;
-  margin: auto;
-  font-size: 1.2em;
-  padding: 5px;
-  cursor: pointer;
-}
+// button {
+//   display: block;
+//   margin: auto;
+//   font-size: 1.2em;
+//   padding: 5px;
+//   cursor: pointer;
+// }
 
-h1 ~ button {
-  margin: 1.5em auto 0.5em auto;
-}
+// h1 ~ button {
+//   margin: 1.5em auto 0.5em auto;
+// }
 
-.grid > .card:hover {
-  cursor: pointer;
-}
+// .grid > .card:hover {
+//   cursor: pointer;
+// }
 
-.grid > .card:active {
-  transform: scale(0.95);
-}
+// .grid > .card:active {
+//   transform: scale(0.95);
+// }
 
-.grid-btn {
-  margin: 1em 0;
-  display: grid;
-  display: flex;
-  gap: 1em;
-  padding: 1em 2em 0em 2em;
-  flex-wrap: wrap;
-}
+// .grid-btn {
+//   margin: 1em 0;
+//   display: grid;
+//   display: flex;
+//   gap: 1em;
+//   padding: 1em 2em 0em 2em;
+//   flex-wrap: wrap;
+// }
 
-.grid-btn > button {
-  flex: 1;
-}
+// .grid-btn > button {
+//   flex: 1;
+// }

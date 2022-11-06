@@ -17,3 +17,11 @@ export interface InputValue {
   isInvalid: boolean;
   state: null | 'error' | 'success' | 'disabled';
 }
+
+// CloneJira
+export interface Candidate {
+  id: string;
+  name: string;
+  step: 'Entrevista inicial' | 'Entrevista tecnica' | 'Oferta' | 'Rechazo' | 'Asignacion';
+  comments: string;
+}

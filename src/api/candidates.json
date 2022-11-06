@@ -1,0 +1,14 @@
+[
+  {
+    "id": "goncy",
+    "name": "Gonzalo Pozzo",
+    "step": "Entrevista tecnica",
+    "comments": "Medio pelo"
+  },
+  {
+    "id": "doe",
+    "name": "John Doe",
+    "step": "Entrevista inicial",
+    "comments": ""
+  }
+]
