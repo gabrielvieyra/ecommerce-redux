@@ -9,6 +9,8 @@ import Register from './pages/Register';
 import Login02 from './pages/Login02';
 import Welcome from './pages/Welcome';
 
+import Crud from './pages/Crud';
+
 // FontAwesomeIcon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
@@ -80,6 +82,8 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/login02' element={<Login02 />} />
         <Route path='/welcome' element={<Welcome />} />
+
+        <Route path='/crud' element={<Crud />} />
       </Routes>
     </>
   );
