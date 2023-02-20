@@ -19,6 +19,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       </BrowserRouter>
     </Provider> */}
     {/* <TestApp title='Hola, Soy Vegeta' subTitle='No hay subtitulo' name='Gabriel Vieyra' /> */}
-    <CounterApp value={20} />
+    <CounterApp value={100} />
   </React.StrictMode>
 );
