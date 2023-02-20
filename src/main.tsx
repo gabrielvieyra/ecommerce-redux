@@ -9,6 +9,7 @@ import store from './app/store';
 
 // Components
 import TestApp from './pages/TestApp';
+import CounterApp from './pages/CounterApp';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <App />
       </BrowserRouter>
     </Provider> */}
-    <TestApp title='No hay titulo' subTitle='No hay subtitulo' name='Gabriel Vieyra' />
+    {/* <TestApp title='Hola, Soy Vegeta' subTitle='No hay subtitulo' name='Gabriel Vieyra' /> */}
+    <CounterApp value={20} />
   </React.StrictMode>
 );
